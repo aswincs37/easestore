@@ -86,8 +86,8 @@ class MyAccount extends StatelessWidget {
                 },
               ),
               Image.asset(
-                'images/frock.jpg',
-                height: 150,
+                'images/logo1.png',
+                height: 200,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
               ),

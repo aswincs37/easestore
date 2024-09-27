@@ -47,7 +47,7 @@ class ShowAllProductsScreen extends StatelessWidget {
                           width: double.infinity,
                           child: Image.network(
                             product['imageUrls'][0], // Display the first image
-                            fit: BoxFit.cover,
+                           
                           ),
                         ),
                       const SizedBox(height: 10),

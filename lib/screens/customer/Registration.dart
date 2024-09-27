@@ -79,9 +79,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 110, 20, 110),
+            padding: const EdgeInsets.all(2),
             child: Column(
               children: [
+                  Container(
+            
+            child: const Image(image: AssetImage("images/black.png")),
+                ),
                 const Text(
                   "Create Account",
                   style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),

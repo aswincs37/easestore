@@ -13,7 +13,10 @@ class MyOrdersPage extends StatelessWidget {
     if (currentUser == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('My Orders',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+          title: const Text(
+            'My Orders',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
           backgroundColor: Colors.green,
         ),
         body: const Center(
@@ -24,7 +27,10 @@ class MyOrdersPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Orders'),
+        title: const Text(
+          'My Orders',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.green,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -34,7 +40,7 @@ class MyOrdersPage extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print("Snapshot error: ${snapshot.error}"); // Log error
+            print("Snapshot error: ${snapshot.error}");
             return const Center(child: Text('Something went wrong.'));
           }
 
@@ -74,13 +80,16 @@ class MyOrdersPage extends StatelessWidget {
                       const SizedBox(height: 10),
                       Text(
                           'Order Date: ${order['timestamp'] != null ? (order['timestamp'] as Timestamp).toDate().toString() : 'N/A'}'),
-                      Text('Status: $status',style: const TextStyle(color: Colors.green,fontWeight:FontWeight.bold),),
+                      Text(
+                        'Status: $status',
+                        style: const TextStyle(
+                            color: Colors.green, fontWeight: FontWeight.bold),
+                      ),
                       const SizedBox(height: 10),
                       if (status == 'Delivered')
                         FeedbackSection(
                           orderId: order.id,
                           userId: currentUser.uid,
-                        
                           items: items,
                         ),
                     ],
@@ -91,6 +100,40 @@ class MyOrdersPage extends StatelessWidget {
           );
         },
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const BottomNavBar(),
+              ),
+              (Route<dynamic> route) => false,
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Continue shopping",
+                style: TextStyle(color: Colors.white),
+              ),
+              SizedBox(width: 5),
+              Icon(
+                Icons.arrow_forward,
+                size: 24,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -98,14 +141,12 @@ class MyOrdersPage extends StatelessWidget {
 class FeedbackSection extends StatefulWidget {
   final String orderId;
   final String userId;
-
   final List items;
 
   const FeedbackSection({
     Key? key,
     required this.orderId,
     required this.userId,
-  
     required this.items,
   }) : super(key: key);
 
@@ -152,11 +193,8 @@ class _FeedbackSectionState extends State<FeedbackSection> {
                     });
 
                     try {
-                      await FirebaseFirestore.instance
-                          .collection('feedbacks')
-                          .add({
+                      await FirebaseFirestore.instance.collection('feedbacks').add({
                         'userId': widget.userId,
-                       
                         'orderId': widget.orderId,
                         'feedback': _feedbackController.text,
                         'items': widget.items.map((item) {
@@ -171,10 +209,14 @@ class _FeedbackSectionState extends State<FeedbackSection> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           backgroundColor: Colors.green,
-                          content: Text('Feedback submitted successfully!',style: TextStyle(color: Colors.white),),
+                          content: Text(
+                            'Feedback submitted successfully!',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       );
-                        Navigator.of(context).pushReplacement(
+
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const BottomNavBar(),
                         ),

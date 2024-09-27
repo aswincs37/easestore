@@ -98,7 +98,7 @@ void addToCart(BuildContext context) async {
             items: product['imageUrls'].map<Widget>((imageUrl) {
               return Image.network(
                 imageUrl,
-                fit: BoxFit.cover,
+                //fit: BoxFit.cover,
                 width: double.infinity,
               );
             }).toList(),
