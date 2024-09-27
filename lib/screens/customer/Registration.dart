@@ -1,5 +1,5 @@
-import 'package:easestore/screens/Home_screen.dart';
-import 'package:easestore/screens/bottom_nav.dart';
+import 'package:easestore/screens/customer/Home_screen.dart';
+import 'package:easestore/screens/customer/bottom_nav.dart';
 import 'package:easestore/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -1,4 +1,4 @@
-import 'package:easestore/screens/bottom_nav.dart';
+import 'package:easestore/screens/customer/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class CustomScaffold extends StatelessWidget {

@@ -50,8 +50,17 @@ class AdminOrdersPage extends StatelessWidget {
                       const SizedBox(height: 10),
                       const Text('Items:'),
                       ...items.map((item) {
-                        return Text(
-                          '${item['productName']} (Qty: ${item['quantity']}) - ₹${(item['price'] * item['quantity']).toStringAsFixed(2)}',
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Product ID: ${item['productId']}', // Display product ID
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '${item['productName']} (Qty: ${item['quantity']}) - ₹${(item['price'] * item['quantity']).toStringAsFixed(2)}',
+                            ),
+                          ],
                         );
                       }).toList(),
                       const SizedBox(height: 10),

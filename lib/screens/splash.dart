@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:easestore/screens/bottom_nav.dart'; // Import BottomNavBar
+import 'package:easestore/screens/customer/bottom_nav.dart'; // Import BottomNavBar
 import 'package:easestore/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import 'package:flutter/material.dart';

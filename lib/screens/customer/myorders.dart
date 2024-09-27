@@ -1,4 +1,4 @@
-import 'package:easestore/screens/bottom_nav.dart';
+import 'package:easestore/screens/customer/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +13,7 @@ class MyOrdersPage extends StatelessWidget {
     if (currentUser == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('My Orders'),
+          title: const Text('My Orders',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
           backgroundColor: Colors.green,
         ),
         body: const Center(
@@ -55,6 +55,7 @@ class MyOrdersPage extends StatelessWidget {
               String status = order['status'] ?? 'N/A';
 
               return Card(
+                color: const Color.fromARGB(255, 160, 211, 238),
                 margin: const EdgeInsets.all(8.0),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -73,7 +74,7 @@ class MyOrdersPage extends StatelessWidget {
                       const SizedBox(height: 10),
                       Text(
                           'Order Date: ${order['timestamp'] != null ? (order['timestamp'] as Timestamp).toDate().toString() : 'N/A'}'),
-                      Text('Status: $status'),
+                      Text('Status: $status',style: const TextStyle(color: Colors.green,fontWeight:FontWeight.bold),),
                       const SizedBox(height: 10),
                       if (status == 'Delivered')
                         FeedbackSection(

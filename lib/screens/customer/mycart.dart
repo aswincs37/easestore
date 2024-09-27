@@ -1,8 +1,7 @@
-import 'package:easestore/screens/PaymentPage.dart';
+import 'package:easestore/screens/customer/PaymentPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 
 class MyCart extends StatefulWidget {
   const MyCart({Key? key}) : super(key: key);
@@ -24,7 +23,7 @@ class _MyCartState extends State<MyCart> {
 
   // Function to update quantity
   void updateQuantity(String cartItemId, int quantity) {
-    if (quantity > 0) {  // Ensure quantity is positive
+    if (quantity > 0) { // Ensure quantity is positive
       FirebaseFirestore.instance.collection('cart').doc(cartItemId).update({
         'quantity': quantity,
       });
@@ -41,19 +40,24 @@ class _MyCartState extends State<MyCart> {
     double totalAmount = 0;
     List<Map<String, dynamic>> cartItems = [];
 
-    FirebaseFirestore.instance.collection('cart').where('userId', isEqualTo: FirebaseAuth.instance.currentUser?.uid).get().then((snapshot) {
-      snapshot.docs.forEach((cartItem) {
+    FirebaseFirestore.instance
+        .collection('cart')
+        .where('userId', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then((snapshot) {
+      for (var cartItem in snapshot.docs) {
         int quantity = cartItem['quantity'] ?? 1;
         double price = cartItem['price'] * quantity;
         totalAmount += price;
 
         cartItems.add({
+          'productId': cartItem['productId'],  // Assuming you have 'productId' in your cart items
           'productName': cartItem['productName'],
           'quantity': quantity,
           'price': cartItem['price'],
-          // 'imageUrl': cartItem['imageUrl'], // Add image URL if needed
+          'imageUrls': cartItem['imageUrls'], // Add image URLs if needed
         });
-      });
+      }
 
       // Navigate to PaymentPage
       Navigator.push(
@@ -72,7 +76,7 @@ class _MyCartState extends State<MyCart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Cart'),
+        title: const Text('My Cart', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.green,
         actions: [
           // StreamBuilder to get total amount dynamically
@@ -93,7 +97,7 @@ class _MyCartState extends State<MyCart> {
                 child: Center(
                   child: Text(
                     'Total: ₹${totalAmount.toStringAsFixed(2)}',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
                   ),
                 ),
               );
@@ -116,7 +120,7 @@ class _MyCartState extends State<MyCart> {
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               var cartItem = snapshot.data!.docs[index];
-              int quantity = cartItem['quantity'] ?? 1; // Default quantity
+              int quantity = cartItem['quantity'] ?? 1;
               double price = cartItem['price'] * quantity;
 
               return Card(
@@ -125,26 +129,25 @@ class _MyCartState extends State<MyCart> {
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
                     children: [
-                      // Product Image
-                      // ClipOval(
-                      //   child: Image.network(
-                      //     cartItem['imageUrl'], // Replace with your image field
-                      //     width: 50,
-                      //     height: 50,
-                      //     fit: BoxFit.cover,
-                      //   ),
-                      // ),
-                      const SizedBox(width: 16), // Spacing
+                      ClipOval(
+                        child: Image.network(
+                          cartItem['imageUrls'].isNotEmpty ? cartItem['imageUrls'][0] : '',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Icon(Icons.error);
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               cartItem['productName'],
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 8),
                             Text('Price: ₹${cartItem['price'].toStringAsFixed(2)}'),
@@ -167,7 +170,10 @@ class _MyCartState extends State<MyCart> {
                               ],
                             ),
                             const SizedBox(height: 8),
-                            Text('Total: ₹${price.toStringAsFixed(2)}'),
+                            Text(
+                              'Total: ₹${price.toStringAsFixed(2)}',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
                           ],
                         ),
                       ),
@@ -191,12 +197,12 @@ class _MyCartState extends State<MyCart> {
         child: ElevatedButton(
           onPressed: checkout,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.deepOrange,
             padding: const EdgeInsets.symmetric(vertical: 16.0),
           ),
           child: const Text(
             'Proceed to Checkout',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: Colors.white),
           ),
         ),
       ),

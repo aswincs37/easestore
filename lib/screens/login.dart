@@ -1,7 +1,7 @@
-import 'package:easestore/screens/Registration.dart';
+import 'package:easestore/screens/customer/Registration.dart';
 import 'package:easestore/screens/admin/AdminHomeScreen.dart';
-import 'package:easestore/screens/bottom_nav.dart';
-import 'package:easestore/screens/forget_password.dart';
+import 'package:easestore/screens/customer/bottom_nav.dart';
+import 'package:easestore/screens/customer/forget_password.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -27,12 +27,11 @@ class _SignInState extends State<SignIn> {
     if (currentUser != null) {
       // User is already logged in, navigate to the bottom navigation bar
       WidgetsBinding.instance.addPostFrameCallback((_) {
-           Navigator.of(context).pushAndRemoveUntil(
-  MaterialPageRoute(
-    builder: (context) => const BottomNavBar(),
-  ),
-  (route) => false, // This removes all the previous routes.
-);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const BottomNavBar(),
+          ),
+        );
       });
     }
   }
@@ -65,24 +64,18 @@ class _SignInState extends State<SignIn> {
       if (emailAddressController.text == 'admin@gmail.com' &&
           passwordController.text == 'admin@123') {
         // Navigate to AdminHomeScreen
-       Navigator.of(context).pushAndRemoveUntil(
-  MaterialPageRoute(
-    builder: (context) => const AdminHomeScreen(),
-  ),
-  (Route<dynamic> route) => false, // This removes all previous routes
-// This removes all the previous routes
-);
-
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const AdminHomeScreen(),
+          ),
+        );
       } else {
         // Navigate to HomeScreen for other users
-      Navigator.of(context).pushAndRemoveUntil(
-  MaterialPageRoute(
-    builder: (context) => const BottomNavBar(),
-  ),
-  (Route<dynamic> route) => false, // This removes all previous routes
-);
-
-       
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const BottomNavBar(),
+          ),
+        );
       }
     } on FirebaseAuthException catch (e) {
       var errorMessage = 'Incorrect Username or password.';

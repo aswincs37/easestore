@@ -1,6 +1,6 @@
 import 'package:easestore/screens/admin/AddProductScreen.dart';
 import 'package:easestore/screens/admin/CustomerFeedback.dart';
-import 'package:easestore/screens/admin/Order.dart';
+import 'package:easestore/screens/admin/CustomerOrder.dart';
 import 'package:easestore/screens/admin/ShowAllProducts.dart';
 import 'package:easestore/screens/login.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +15,11 @@ class AdminHomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Dashboard'),
+        title: const Text('Admin Dashboard',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
         backgroundColor: Colors.green,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout,color: Colors.red,),
             onPressed: () async {
               await FirebaseAuth.instance.signOut();
              Navigator.of(context).pushReplacement(

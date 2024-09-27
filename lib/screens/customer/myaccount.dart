@@ -1,8 +1,8 @@
 import 'package:easestore/screens/login.dart';
-import 'package:easestore/screens/myorders.dart';
+import 'package:easestore/screens/customer/myorders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:easestore/screens/custom_scaffold.dart';
+import 'package:easestore/screens/customer/custom_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyAccount extends StatelessWidget {
@@ -37,26 +37,31 @@ class MyAccount extends StatelessWidget {
             children: [
               // Display user data dynamically from Firestore
               FutureBuilder<DocumentSnapshot>(
-                future: FirebaseFirestore.instance.collection('users').doc(user.uid).get(),
+                future: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(user.uid)
+                    .get(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
-                    return const Center(child: Text("Error fetching user data."));
+                    return const Center(
+                        child: Text("Error fetching user data."));
                   }
                   if (!snapshot.hasData || !snapshot.data!.exists) {
                     return const Center(child: Text("User not found."));
                   }
 
                   var userData = snapshot.data!.data() as Map<String, dynamic>;
-                  String userName = userData['name'] ?? 'User'; // Replace 'name' with your Firestore field
-                  String userEmail = userData['email'] ?? 'Email'; // Replace 'email' with your Firestore field
+                  String userName = userData['name'] ??
+                      'User'; // Replace 'name' with your Firestore field
+                  String userEmail = userData['email'] ??
+                      'Email'; // Replace 'email' with your Firestore field
 
                   return Container(
                     height: 80,
                     width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(color: Colors.green[700]),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Column(
@@ -64,14 +69,16 @@ class MyAccount extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            userName,
-                            style: const TextStyle(fontSize: 22, color: Colors.white),
+                            "Hi, $userName",
+                            style: const TextStyle(
+                                fontSize: 22, color: Colors.deepPurple,fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            userEmail,
-                            style: const TextStyle(fontSize: 12, color: Colors.white),
-                          ),
+                         
+                          // Text(
+                          //   userEmail,
+                          //   style: const TextStyle(
+                          //       fontSize: 12, color: Colors.white),
+                          // ),
                         ],
                       ),
                     ),
@@ -121,7 +128,8 @@ class MyAccount extends StatelessWidget {
                 title: 'Orders',
                 onTap: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const MyOrdersPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const MyOrdersPage()),
                   );
                 },
               ),
@@ -167,7 +175,8 @@ class ListOfOption extends StatelessWidget {
   final String title;
   final VoidCallback? onTap;
 
-  const ListOfOption({super.key, required this.icon, required this.title, this.onTap});
+  const ListOfOption(
+      {super.key, required this.icon, required this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {

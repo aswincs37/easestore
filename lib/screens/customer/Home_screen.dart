@@ -1,4 +1,4 @@
-import 'package:easestore/screens/product_details.dart';
+import 'package:easestore/screens/customer/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -42,18 +42,28 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('All Products'),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
-      ),
+    appBar: AppBar(
+  title: const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('E A S E   S T O R E',style: TextStyle(color: Colors.deepOrange),),
+      Text('Make your choice....!',style: TextStyle(color: Colors.deepPurpleAccent,fontSize: 10),)
+
+    ],
+  ),
+  centerTitle: false,
+  backgroundColor: Colors.transparent,
+  elevation: 0.0,
+  leading: const SizedBox(
+    width: 50, 
+    height: 50, 
+    child: Image(
+      image: AssetImage("images/logo1.png"),
+      fit: BoxFit.cover, 
+    ),
+  ),
+),
+
       body: Column(
         children: [
           // Search Bar

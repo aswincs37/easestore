@@ -1,7 +1,6 @@
-import 'package:easestore/screens/Home_screen.dart';
-import 'package:easestore/screens/food.dart';
-import 'package:easestore/screens/myaccount.dart';
-import 'package:easestore/screens/mycart.dart';
+import 'package:easestore/screens/customer/Home_screen.dart';
+import 'package:easestore/screens/customer/myaccount.dart';
+import 'package:easestore/screens/customer/mycart.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -16,9 +15,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const FoodPage(),
-    const MyAccount(),
     const MyCart(),
+    const MyAccount(),
+    
   ];
 
   void _onItemTapped(int index) {
@@ -32,29 +31,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       body: _screens[_selectedIndex], // Show the selected screen
       bottomNavigationBar: BottomNavigationBar(
+        
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.green,
+        backgroundColor: Colors.greenAccent,
+        selectedItemColor: Colors.red,
         unselectedItemColor: Colors.black,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.food_bank_outlined),
-            label: 'Outfits',
+             BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            label: 'My Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined),
             label: 'My Account',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'My Cart',
-          ),
+       
         ],
       ),
     );

@@ -1,15 +1,10 @@
 import 'package:easestore/firebase_options.dart';
-
-import 'package:easestore/screens/Home_screen.dart';
-
-
-import 'package:easestore/screens/cart_provider.dart';
-
-import 'package:easestore/screens/mycart.dart';
+import 'package:easestore/screens/customer/Home_screen.dart';
+import 'package:easestore/screens/customer/mycart.dart';
 import 'package:easestore/screens/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 
 
 
@@ -18,10 +13,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ChangeNotifierProvider(
-    create: (context) => CartProvider(),
-    child: const MyApp(),
-  ));
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {
