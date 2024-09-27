@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342673673973",
+    "project_id": "easestore-b356d",
+    "storage_bucket": "easestore-b356d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342673673973:android:54373a89160a8a0e247fbc",
+        "android_client_info": {
+          "package_name": "com.example.easestore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-eB_Qi_ZrmUCdzoKJn1cwARQQ3OlhOgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
