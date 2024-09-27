@@ -98,87 +98,94 @@ class _SignInState extends State<SignIn> {
         }
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 110, 20, 110),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Login",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                "Please sign in to continue",
-                style: TextStyle(fontSize: 15, color: Colors.grey),
-              ),
-              const SizedBox(height: 30),
-              TextFormField(
-                controller: emailAddressController,
-                style: const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  labelText: "EMAIL",
-                  prefixIcon: Icon(Icons.email_outlined),
-                  labelStyle: TextStyle(fontSize: 15),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+            
+            child: Image(image: AssetImage("images/black.png")),
                 ),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                style: const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  labelText: "PASSWORD",
-                  prefixIcon: const Icon(Icons.lock_outlined),
-                  suffixIcon: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ForgetPassword(),
-                      ));
-                    },
-                    child: const Text(
-                      'FORGOT',
-                      style: TextStyle(color: Colors.green),
-                    ),
+                const Text(
+                  "Login",
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Please sign in to continue",
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                ),
+                const SizedBox(height: 30),
+                TextFormField(
+                  controller: emailAddressController,
+                  style: const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
+                  decoration: const InputDecoration(
+                  
+                    labelText: "EMAIL",
+                    prefixIcon: Icon(Icons.email_outlined),
+                    labelStyle: TextStyle(fontSize: 15),
                   ),
-                  labelStyle: const TextStyle(fontSize: 15),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Align(
-                alignment: Alignment.centerRight,
-                child: SizedBox(
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: passwordController,
+                  obscureText: true,
+                  style: const TextStyle(color: Colors.black, fontFamily: 'SFUIDisplay'),
+                  decoration: InputDecoration(
+                   
+                    labelText: "PASSWORD",
+                    prefixIcon: const Icon(Icons.lock_outlined),
+                    suffixIcon: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const ForgetPassword(),
+                        ));
+                      },
+                      child: const Text(
+                        'FORGOT',
+                        style: TextStyle(color: Colors.green),
                       ),
                     ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "LOGIN",
-                          style: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(fontSize: 15),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: _login,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        SizedBox(width: 5),
-                        Icon(
-                          Icons.arrow_forward,
-                          size: 24,
-                          color: Colors.white,
-                        ),
-                      ],
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "LOGIN",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.arrow_forward,
+                            size: 24,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: SizedBox(
